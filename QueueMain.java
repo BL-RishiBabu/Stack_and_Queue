@@ -23,8 +23,26 @@ class LinkedListQueue<T> {
         tail = newNode;
     }
 
-    public void display() {
+    public T dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty. Cannot dequeue.");
+            return null;
+        }
+        T dequeuedData = head.data;
+        head = head.next;
+        
         if (head == null) {
+            tail = null;
+        }
+        return dequeuedData;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public void display() {
+        if (isEmpty()) {
             System.out.println("Queue is empty.");
             return;
         }
@@ -45,7 +63,16 @@ public class QueueMain {
         queue.enqueue(30);
         queue.enqueue(70);
 
-        System.out.print("Queue Sequence: ");
-        queue.display(); 
+        System.out.print("Initial Queue: ");
+        queue.display();
+
+        System.out.println("Dequeued element: " + queue.dequeue());
+        
+        System.out.print("Queue after dequeue: ");
+        queue.display();
+        
+        System.out.println("Dequeued element: " + queue.dequeue());
+        System.out.print("Queue after second dequeue: ");
+        queue.display();
     }
 }
