@@ -11,10 +11,31 @@ class Node<T> {
 class LinkedListStack<T> {
     private Node<T> head;
 
-    public void add(T data) {
+    public void push(T data) {
         Node<T> newNode = new Node<>(data);
         newNode.next = head;
         head = newNode;
+    }
+
+    public T peek() {
+        if (isEmpty()) {
+            return null;
+        }
+        return head.data;
+    }
+
+    public T pop() {
+        if (isEmpty()) {
+            System.out.println("Stack is empty.");
+            return null;
+        }
+        T poppedData = head.data;
+        head = head.next;
+        return poppedData;
+    }
+
+    public boolean isEmpty() {
+        return head == null;
     }
 
     public void display() {
@@ -27,16 +48,23 @@ class LinkedListStack<T> {
     }
 }
 
-// Main class to execute UC 1
 public class StackMain {
     public static void main(String[] args) {
         LinkedListStack<Integer> stack = new LinkedListStack<>();
 
-        stack.add(70);
-        stack.add(30);
-        stack.add(56);
+        stack.push(70);
+        stack.push(30);
+        stack.push(56);
 
-        System.out.print("Stack Sequence: ");
-        stack.display(); 
+        System.out.print("Initial Stack: ");
+        stack.display();
+
+        System.out.println("Top element (Peek): " + stack.peek());
+
+        while (!stack.isEmpty()) {
+            System.out.println("Popping: " + stack.pop());
+            System.out.print("Current Stack: ");
+            stack.display();
+        }
     }
 }
